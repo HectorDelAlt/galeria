@@ -8,7 +8,6 @@
     $result->bindColumn('password', $passw);
 ?>
 <body>  
-
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
