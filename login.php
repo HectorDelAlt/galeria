@@ -21,7 +21,7 @@
                 <input type="text" id="login" class="fadeIn second" name="user" placeholder="Email">
                 <input type="password" id="login" class="fadeIn third" name="password" placeholder="Contraseña">
                 <input type="submit" class="fadeIn fourth" value="Iniciar Sesión" name="send">
-                <a href="register.php" class="btn fadeIn fourth">Crear un Nuevo Autor</a>
+                <a href="registro.php" class="btn fadeIn fourth">Crear un Nuevo Autor</a>
             </form>
         </div>
     </div>
