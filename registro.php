@@ -1,3 +1,23 @@
+<?php include "includes/connection.php"; ?>
+<?php 
+try {
+    if(isset($_POST["send"])){
+        $name = $_POST["user"];
+        $email = $_POST["email"];
+        $passw = $_POST["password"];
+
+
+        $sql = "INSERT INTO authors (id, name, email, password, enabled, created) VALUES (NULL, '$name', '$email', '$passw', 0, CURRENT_TIMESTAMP)";
+        $link->exec($sql);
+        
+        header("Location: login.php");
+    }
+} catch (Exception $ex) {
+    die("Error al crear el Usuario. " . $ex->getMessage());
+}
+
+    
+?>
 <?php include "includes/top.php" ?>
 <body>
 <div class="wrapper fadeInDown">

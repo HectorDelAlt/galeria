@@ -1,23 +1,31 @@
-<?php include "includes/top.php"; ?>
+<?php include "includes/connection.php"; ?>
 <?php
-    $sql = "Select * FROM authors";
-    $result = $link->query($sql);
+if (isset($_POST["send"])) {
+    $email = $_POST["email"];
+    $passw = $_POST["password"];
 
-    $result->bindColumn('id', $id);
-    $result->bindColumn('name', $name);
-    $result->bindColumn('password', $passw);
+    $sql = "Select * FROM authors WHERE email='$email' AND password='$passw'";
+    $result = $link->query($sql);
+    $user = $result->fetch();
+    if($user){
+        header("Location: https:\\www.google.com");
+    } else {
+        echo "Usuario Incorrecto";
+    }
+}
 ?>
-<body>  
+<?php include "includes/top.php"; ?>
+<body>
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="images/usuario.png" id="icon" alt="User Icon"/>
+                <img src="images/usuario.png" id="icon" alt="User Icon" />
             </div>
             <!-- Login Form -->
             <form method="POST">
-                <input type="text" id="login" class="fadeIn second" name="user" placeholder="* Email" required>
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="* Email" required>
                 <input type="password" id="login" class="fadeIn third" name="password" placeholder="* Contraseña" required>
                 <input type="submit" class="fadeIn fourth" value="Iniciar Sesión" name="send">
                 <a href="registro.php" class="btn fadeIn fourth">Crear un Nuevo Autor</a>
@@ -25,4 +33,5 @@
         </div>
     </div>
 </body>
+
 </html>
