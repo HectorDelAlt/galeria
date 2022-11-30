@@ -8,9 +8,9 @@ if (isset($_POST["send"])) {
     $result = $link->query($sql);
     $user = $result->fetch();
     if($user){
-        header("Location: https:\\www.google.com");
+        header("Location: listado.php");
     } else {
-        echo "Usuario Incorrecto";
+        echo '<script language="javascript">alert("Usuario/Contraseña Incorrectos");</script>';
     }
 }
 ?>
