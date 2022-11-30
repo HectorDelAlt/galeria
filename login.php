@@ -1,13 +1,21 @@
-<?php include "includes/connection.php"; ?>
+<?php include "includes/connection.php";?>
 <?php
 if (isset($_POST["send"])) {
     $email = $_POST["email"];
     $passw = $_POST["password"];
 
     $sql = "Select * FROM authors WHERE email='$email' AND password='$passw'";
+
     $result = $link->query($sql);
+    $result->bindColumn('id', $userID);
+    $result->bindColumn('email', $userEmail);
     $user = $result->fetch();
     if ($user) {
+        session_start();
+        $_SESSION['id'] = $userID;
+        $_SESSION['email'] = $userEmail;
+        $_SESSION['session_id'] = session_id();
+
         header("Location: listado.php");
     } else {
         echo '<script language="javascript">alert("Usuario/Contraseña Incorrectos");</script>';
