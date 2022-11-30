@@ -1,18 +1,15 @@
 <?php include "includes/connection.php"?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login/Register</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-        html {
-  background-color: #56baed;
-}
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -103,7 +100,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email]{
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -123,11 +120,11 @@ input[type=text], input[type=password] {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
-input[type=text]:focus, input[type=password]:focus{
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
-input[type=text]:placeholder, input[type=password]:placeholder{
+input[type=text]:placeholder, input[type=password]:placeholder, input[type=email]:placeholder{
   color: #cccccc;
 }
 /* ANIMATIONS */
@@ -199,6 +196,11 @@ input[type=text]:placeholder, input[type=password]:placeholder{
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
+}
+.fadeIn.fifth {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
