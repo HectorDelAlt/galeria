@@ -27,7 +27,38 @@
         </div>
     </div>
     <br><br>
-    <h1>Listado de Fotos</h1>
+    <br><br>
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>Listado de <b>Fotos</b></h2>
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Fichero</th>
+                        <th>Activo</th>
+                        <th>Creado</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    </div>
 
 </body>
 
