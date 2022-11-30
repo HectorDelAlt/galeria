@@ -1,7 +1,7 @@
 <?php include "includes/connection.php"; ?>
-<?php 
+<?php
 try {
-    if(isset($_POST["send"])){
+    if (isset($_POST["send"])) {
         $name = $_POST["user"];
         $email = $_POST["email"];
         $passw = $_POST["password"];
@@ -9,23 +9,24 @@ try {
 
         $sql = "INSERT INTO authors (id, name, email, password, enabled, created) VALUES (NULL, '$name', '$email', '$passw', 0, CURRENT_TIMESTAMP)";
         $link->exec($sql);
-        
+
         header("Location: login.php");
     }
 } catch (Exception $ex) {
     die("Error al crear el Usuario. " . $ex->getMessage());
 }
 
-    
+
 ?>
 <?php include "includes/top.php" ?>
+
 <body>
-<div class="wrapper fadeInDown">
+    <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="images/usuario.png" id="icon" alt="User Icon"/>
+                <a href="index.php"><img src="images/usuario.png" id="icon" alt="User Icon" /></a>
             </div>
             <!-- Login Form -->
             <form method="POST">
@@ -38,4 +39,5 @@ try {
         </div>
     </div>
 </body>
+
 </html>

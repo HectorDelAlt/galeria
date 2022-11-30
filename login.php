@@ -7,7 +7,7 @@ if (isset($_POST["send"])) {
     $sql = "Select * FROM authors WHERE email='$email' AND password='$passw'";
     $result = $link->query($sql);
     $user = $result->fetch();
-    if($user){
+    if ($user) {
         header("Location: listado.php");
     } else {
         echo '<script language="javascript">alert("Usuario/Contraseña Incorrectos");</script>';
@@ -15,13 +15,14 @@ if (isset($_POST["send"])) {
 }
 ?>
 <?php include "includes/top.php"; ?>
+
 <body>
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="images/usuario.png" id="icon" alt="User Icon" />
+                <a href="index.php"><img src="images/usuario.png" id="icon" alt="User Icon" /></a>
             </div>
             <!-- Login Form -->
             <form method="POST">
