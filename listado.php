@@ -1,7 +1,6 @@
 <?php include "includes/connection.php" ?>
 <?php
-session_start();
-$sql = "Select * FROM images";
+$sql = "SELECT * FROM images";
 $result = $link->query($sql);
 
 $result->bindColumn('id', $id);
@@ -68,8 +67,9 @@ $count = $result->fetchAll();
                 <tbody>
                     <?php
                     if (count($count) > 0) {
-                        while ($result->fetch(PDO::FETCH_BOUND)) :
+                        while ($result->fetch()):
                     ?>
+                    
                             <tr>
                                 <td><?= $author_id ?></td>
                                 <td><?= $name ?></td>
