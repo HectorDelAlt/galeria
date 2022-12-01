@@ -8,7 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Imágen</title>
     <?php include "includes/navBar.php" ?>
+    <style>
+        .form_new {
+            padding-top: 50px;
+            background-color: #ffffff;
+            border: 1px solid #1D89CF;
+        }
+    </style>
 </head>
+
 <body>
     <div class="menu">
         <div class="container-fluid">
@@ -41,6 +49,59 @@
             echo "<p><img src='./images/" . $_POST["name"] . "." .  $ext . "'></p>";
         }
     ?>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 text-lett">
+                <h2 class="mt-5">Añadir Nueva Foto</h2>
+            </div>
+
+        </div>
+        <div class="row form_new">
+            <div class="col-lg-2 text-left"></div>
+            <div class="col-lg-10 text-left">
+                <form role="form" action="actions/new_foto.act.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="author_id" class="col-lg-2 col-form-label">Autor</label>
+                        <div class="col-lg-4 text-lett">
+                            <select class="form-control" name=author_id id=author_id>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-lg-2 col-form-label">Nombre</label>
+                        <div class="col-lg-4 text-lett">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fichero" class="col-lg-2 col-form-label">Fichero</label>
+                        <div class="col-lg-4 text-lett">
+                            <input type="file" class="form-control" id="fichero" name="fichero" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="size" class="col-lg-2 col-form-label">Texto</label>
+                        <div class="col-lg-4 text-lett">
+                            <textarea rows="5" cols="60" id="text" name="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="enabled" class="col-lg-2 col-form-label">Activado</label>
+                        <div class="col-lg-3 text-lett">
+                            <input type="checkbox" id="enabled" name="enabled">
+                        </div>
+                    </div>
+                    <br><br>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+                <br><br>
+            </div>
+            <div class="col-lg-2 text-left"></div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
