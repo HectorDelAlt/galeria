@@ -27,6 +27,20 @@
     <br><br>
     <br><br>
     <h1>Subir Imágen</h1>
+    <?php
+        if(is_uploaded_file($_FILES["file"]["tmp_name"])){
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+            if($ext == "png" || $ext == "jpeg" || $ext == "gif"){
+                if(move_uploaded_file($_FILES["file"]["tmp_name"],"./images/" . $_POST["name"].".$ext")){
+                }else{
+                    echo "No se ha enviado correctamente";
+                }
+            }else{
+                echo "Está enviando un archivo de formato '$ext'. Debe enviar JPEG, GIF o PNG";
+            }
+            echo "<p><img src='./images/" . $_POST["name"] . "." .  $ext . "'></p>";
+        }
+    ?>
 </body>
 
 </html>
