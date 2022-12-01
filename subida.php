@@ -26,7 +26,7 @@
     </div>
     <br><br>
     <br><br>
-    <h1>Subir Imágen</h1>
+    <h1>Subir Imagen</h1>
     <?php
         if(is_uploaded_file($_FILES["file"]["tmp_name"])){
             $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
