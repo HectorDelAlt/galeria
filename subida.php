@@ -34,21 +34,6 @@
     </div>
     <br><br>
     <br><br>
-    <h1>Subir Imagen</h1>
-    <?php
-        if(is_uploaded_file($_FILES["file"]["tmp_name"])){
-            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-            if($ext == "png" || $ext == "jpeg" || $ext == "gif"){
-                if(move_uploaded_file($_FILES["file"]["tmp_name"],"./images/" . $_POST["name"].".$ext")){
-                }else{
-                    echo "No se ha enviado correctamente";
-                }
-            }else{
-                echo "Está enviando un archivo de formato '$ext'. Debe enviar JPEG, GIF o PNG";
-            }
-            echo "<p><img src='./images/" . $_POST["name"] . "." .  $ext . "'></p>";
-        }
-    ?>
     <div class="container">
         <div class="row">
 
@@ -60,11 +45,21 @@
         <div class="row form_new">
             <div class="col-lg-2 text-left"></div>
             <div class="col-lg-10 text-left">
-                <form role="form" action="actions/new_foto.act.php" method="post" enctype="multipart/form-data">
+                <form role="form" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label for="author_id" class="col-lg-2 col-form-label">Autor</label>
                         <div class="col-lg-4 text-lett">
                             <select class="form-control" name=author_id id=author_id>
+                            <option selected disabled>Elige un Autor</option>
+                            <?php
+                                $sql = "SELECT name, id FROM authors";
+                                $result = $link->query($sql);
+                                $result -> bindColumn('name', $name);
+                                $result -> bindColumn('id', $id);
+                                while($result->fetch()):
+                            ?>
+                                <option value="<?=$id?>"><?=$name?></option>
+                            <?php endwhile; ?>
                             </select>
                         </div>
                     </div>
@@ -95,6 +90,30 @@
                     <br><br>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <?php
+                    if(isset($_POST["author_id"]) || isset($_POST["name"]) || isset($_POST["fichero"]) || isset($_POST["text"]) || isset($_POST["enabled"])){
+                        if(is_uploaded_file($_FILES["fichero"]["tmp_name"])){
+                            $ext = pathinfo($_FILES['fichero']['name'], PATHINFO_EXTENSION);
+                            if($ext == "png" || $ext == "jpeg" || $ext == "jpg"){
+                                if(move_uploaded_file($_FILES["fichero"]["tmp_name"],"images/" . $_POST["name"].".$ext")){
+                                    $size=$_FILES['fichero']['size'];
+                                    $fileName = $_POST["name"].".$ext";
+                                    $enabled = isset($_POST["enabled"]) ? 1 : 0;
+
+                                    $insert = "INSERT INTO images VALUES(NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+
+                                    $stmt = $link->prepare($insert);
+
+                                    $stmt->execute([$_POST["author_id"], $_POST["name"], $fileName, $size, $_POST["text"], $enabled]);
+                                }else{
+                                    echo "<p>No se ha enviado correctamente</p>";
+                                }
+                            }else{
+                                echo "<p>Está enviando un archivo de formato '$ext'. Debe enviar JPEG, JPG o PNG</p>";
+                            }
+                        }
+                    }
+                ?>
                 <br><br>
             </div>
             <div class="col-lg-2 text-left"></div>
