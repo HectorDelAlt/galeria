@@ -69,26 +69,29 @@ if (isset($_POST["delete"])) {
                 </thead>
                 <tbody>
                     <?php
+                    if($result) {
                     while ($result->fetch(PDO::FETCH_BOUND)) :
                     ?>
                         <tr>
                             <td><?= $name ?></td>
                             <td><?= $email ?></td>
-                            <td><?php
+                            <td style="text-align: center;"><?php
                                 if ($enabled == 0 && $id != $_SESSION['id']) {
-                                    echo "<img src='https://emojitool.com/img/apple/ios-15.4/black-circle-2711.png' width='30px' height='30px'>";
+                                    echo "<img src='https://emojitool.com/img/apple/ios-15.4/white-circle-1454.png' width='30px' height='30px'>";
                                 } else {
-                                    echo "<img src='https://emojitool.com/img/apple/ios-15.4/large-green-circle-3377.png' width='30px' height='30px'>";
+                                    echo "<img src='https://emojitool.com/img/apple/ios-15.4/large-blue-circle-543.png' width='30px' height='30px'>";
                                 }
                                 ?></td>
                             <td><?= $created ?></td>
-                            <td>
+                            <td style="text-align: center;">
                                 <form method="POST">
-                                    <a class="delete" title="Delete" data-toggle="tooltip" href="listado.php"><button type="submit" name="delete" value='<?=$id?>'"><i class="material-icons"></i></button></a>
+                                    <a class="delete" title="Delete" data-toggle="tooltip" href="listado.php"><i class="material-icons"><button type="submit" name="delete" value='<?=$id?>'></button></i></a>
                                 </form>
                             </td>
                         </tr>
-                    <?php endwhile ?>
+                    <?php endwhile;} else {
+                        echo "<tr><td>No hay Usuarios Registrados</td></tr>";
+                    } ?>
             </table>
         </div>
     </div>
