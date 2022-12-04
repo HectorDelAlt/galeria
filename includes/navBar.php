@@ -21,7 +21,6 @@
             font-size: 13px;
             color: white;
             padding: 10px 35px;
-
         }
 
         .menu .navbar-nav>li>a:hover {

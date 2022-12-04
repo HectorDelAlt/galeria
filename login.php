@@ -44,3 +44,4 @@ if (isset($_POST["send"])) {
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>

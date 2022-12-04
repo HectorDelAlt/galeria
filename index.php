@@ -1,3 +1,5 @@
+<?php include "includes/connection.php" ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -23,6 +25,35 @@
       </div>
     </div>
   </div>
+  <br><br><br>
+  <div class="img-container">
+    <?php
+    $sql = "SELECT * FROM images";
+    $result = $link->query($sql);
+
+    $result->bindColumn('name', $name);
+    $result->bindColumn('file', $file);
+    $result->bindColumn('enabled', $enabled);
+
+    while($result->fetch()):
+    ?>
+    <div class="div-img">
+      <?php
+      if($enabled == 1):
+      ?>
+      <picture>
+          <img src="images/<?=$file?>" alt="<?=$name?>">
+          <figcaption><?=$name?></figcaption>
+      </picture>
+      <?php
+      endif;
+      ?>
+    </div>
+    <?php
+    endwhile;
+    ?>
+  </div>
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>

@@ -98,3 +98,4 @@ if (isset($_POST["delete"])) {
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>

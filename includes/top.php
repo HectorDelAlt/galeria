@@ -226,5 +226,17 @@ input[type=text]:placeholder, input[type=password]:placeholder, input[type=email
   width: 70px;
   height: 70px;
 }
+.alert-success {
+  margin-top: 10px;
+  width: auto;
+  background-color: palegreen;
+  border: 1px solid darkgray;
+}
+.alert-error {
+  margin-top: 10px;
+  width: auto;
+  background-color: indianred;
+  border: 1px solid darkgray;
+}
 </style>
 </head>

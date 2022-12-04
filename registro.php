@@ -41,3 +41,4 @@ try {
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>

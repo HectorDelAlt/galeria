@@ -95,15 +95,13 @@
                         if(is_uploaded_file($_FILES["fichero"]["tmp_name"])){
                             $ext = pathinfo($_FILES['fichero']['name'], PATHINFO_EXTENSION);
                             if($ext == "png" || $ext == "jpeg" || $ext == "jpg"){
-                                if(move_uploaded_file($_FILES["fichero"]["tmp_name"],"images/" . $_POST["name"].".$ext")){
+                                if(move_uploaded_file($_FILES["fichero"]["tmp_name"],"images/" . $_FILES['fichero']['name'])){
                                     $size=$_FILES['fichero']['size'];
-                                    $fileName = $_POST["name"].".$ext";
+                                    $fileName = $_FILES['fichero']['name'];
                                     $enabled = isset($_POST["enabled"]) ? 1 : 0;
 
                                     $insert = "INSERT INTO images VALUES(NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
-
                                     $stmt = $link->prepare($insert);
-
                                     $stmt->execute([$_POST["author_id"], $_POST["name"], $fileName, $size, $_POST["text"], $enabled]);
                                 }else{
                                     echo "<p>No se ha enviado correctamente</p>";
@@ -124,3 +122,4 @@
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>

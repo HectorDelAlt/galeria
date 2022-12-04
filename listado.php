@@ -1,5 +1,17 @@
 <?php include "includes/connection.php" ?>
 <?php
+
+//consulta de eliminar
+$success = false;
+if(isset($_GET['delete'])){
+    $delete = "DELETE FROM images WHERE id=?";
+    $stmt = $link->prepare($delete);
+    if($stmt->execute([$_GET['delete']])){
+        $success = true;
+    }
+}
+
+//consulta para mostrar listado
 $sql = "SELECT * FROM images";
 $result = $link->query($sql);
 
@@ -9,7 +21,8 @@ $result->bindColumn('name', $name);
 $result->bindColumn('file', $file);
 $result->bindColumn('enabled', $enabled);
 $result->bindColumn('created', $created);
-$count = $result->fetchAll();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -66,12 +79,16 @@ $count = $result->fetchAll();
                 </thead>
                 <tbody>
                     <?php
-                    if (count($count) > 0) {
+                    if ($result->rowCount() > 0) {
                         while ($result->fetch()):
+                            $sql2 = "SELECT name FROM authors WHERE id =" . $author_id;
+                            $result2 = $link->query($sql2);
+                            $result2->bindColumn('name', $author_name);
+                            $result2->fetch();
                     ?>
                     
                             <tr>
-                                <td><?= $author_id ?></td>
+                                <td><?= $author_name ?></td>
                                 <td><?= $name ?></td>
                                 <td><?= $file ?></td>
                                 <td style="text-align: center;"><?php
@@ -81,17 +98,33 @@ $count = $result->fetchAll();
                                                                     echo "<img src='https://emojitool.com/img/apple/ios-15.4/large-blue-circle-543.png' width='30px' height='30px'>";
                                                                 }
                                                                 ?></td>
-                                <td><?= $created ?></td>
+                                <td><?= date('d/m/Y H:s:i', strtotime($created)) ?></td>
                                 <td style="text-align: center;">
-                                    <form method="POST">
-                                        <a class="delete" title="Delete" data-toggle="tooltip" href="listado.php"><i class="material-icons"><button type="submit" name="delete" value='<?= $id ?>'></button></i></a>
-                                    </form>
+                                    <a class="edit" title="Edit" data-toggle="tooltip" href="modificacion.php?id=<?=$id?>"><i class="material-icons"><button type="submit" name="edit" value='<?= $id ?>'></button></i></a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a class="delete" title="Delete" data-toggle="tooltip" href="listado.php?delete=<?=$id?>"><i class="material-icons"><button type="submit" name="delete" value='<?= $id ?>'></button></i></a>
                                 </td>
                             </tr>
                     <?php endwhile;
                     } else {
-                        echo "<tr><td colspan='7' style='text-align: center;'>No hay se han añadido fotos</td></tr>";
-                    } ?>
+                        echo "<tr><td colspan='7' style='text-align: center;'>No hay fotos en la galería</td></tr>";
+                    } 
+                    //mensaje de la consulta delete;
+                    if($success && isset($_GET['delete'])){
+                    ?>
+                        <div class="alert-success">
+                            <p>Imagen eliminada con éxito</p>
+                        </div>
+                    <?php
+                    }else if(isset($_GET['delete'])){
+                    ?>
+                        <div class="alert-error">
+                                <p>Error al eliminar</p>
+                        </div>
+                    <?php
+                    }
+                    ?>
             </table>
         </div>
     </div>
@@ -99,3 +132,4 @@ $count = $result->fetchAll();
 </body>
 
 </html>
+<?php include "includes/disconnect.php" ?>
